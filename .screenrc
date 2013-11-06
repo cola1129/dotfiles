@@ -1,2 +1,21 @@
-# Disable the startup message
+# 启动时不显示欢迎屏幕
 startup_message off
+# 定义screen的功能键为Ctrl-L。向终端输入Ctrl-L时应按 Ctrl-L l。
+escape ^Ll
+# 屏幕缓冲区 10000 行。
+defscrollback 10000
+# 在最下一行显示窗口列表和时钟
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rY}%n %t%{-}%+w %=%{..G} %H(%l) %{..Y}"
+# 关闭错误提示
+vbell off
+# 按 Ctrl-L w 或 Ctrl-L Ctrl-W 显示窗口列表
+bind w windowlist -b
+bind ^w windowlist -b
+# 多用户
+multiuser on
+# 断线时自动detach
+autodetach on
+# 设置term
+term rxvt-256color
