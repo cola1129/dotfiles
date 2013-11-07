@@ -5,10 +5,13 @@
 	editor = vim
 	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 	excludesfile = ~/.gitignore_global
-	# 提交时, 不允许混合不同的换行符
-	safecrlf = true
-	# 检出和提交时, 都不自动转换换行符
-	autocrlf = false
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = SMTP_USER
+	smtppass = SMTP_PASSWORD
+	smtpserverport = 587
+	#to = git@vger.kernel.org
 [web]
 	browser = google-chrome
 [rerere]
@@ -16,11 +19,16 @@
 	autoupdate = 1
 [alias]
 	s = status
-	st = status
 	sb = status -s -b
 	#############
+	sa = stash apply
+	sc = stash clear
+	sd = stash drop
+	sl = stash list
+	sp = stash pop
+	ss = stash save
+	#############
 	d = diff
-	di = diff
 	dc = diff --cached
 	dk = diff --check
 	dck = diff --cached --check
@@ -28,15 +36,22 @@
 	c = commit
 	ca = commit -a
 	cm = commit -m
-	ci = commit
+	ci = commit -m
+	cam = commit -am
+	cd = commit --amend
+	cad = commit -a --amend
+	#############
+	a = add .
+	#############
+	ap = apply
+	as = apply --stat
+	ac = apply --check
 	#############
 	l = log --oneline
 	lg = log --oneline --graph --decorate
 	#############
 	o = checkout
-	co = checkout
 	ob = checkout -b
-	cob = checkout -b
 	#############
 	b = branch
 	ba = branch -a
@@ -46,7 +61,13 @@
 	f = fetch
 	fo = fetch origin
 	#############
+	fp = format-patch
+	#############
+	fk = fsck
+	#############
 	m = merge
+	#############
+	pr = prune -v
 	#############
 	ps = push
 	pl = pull
@@ -72,7 +93,19 @@
 	remh = reset --mixed HEAD
 	resh = reset --soft HEAD
 	#############
+	r = remote
+	ra = remote add
+	rm = remote rm
+	rv = remote -v
+	rp = remote prune
+	rs = remote show
+	rso = remote show origin
+	rpo = remote prune origin
+	#############
 	w = show
+	#############
+	meldon = config diff.external /home/pkumar/.meld.py
+	meldof = config --remove-section diff
 	#############
 	human = name-rev --name-only --refs=refs/heads/*
 [color]
@@ -94,11 +127,3 @@
 [github]
 	user = USER
 	token = TOKEN
-[push]
-	default = simple
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
